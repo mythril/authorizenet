@@ -1,0 +1,26 @@
+{
+	"name": "mythril/authorizenet",
+	"type": "library",
+	"description": "Authorize.Net API Wrapper",
+	"keywords": [
+		"gateway",
+		"merchant",
+		"pay",
+		"payment",
+		"authorize.net",
+		"purchase"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Lucas Green",
+			"email": "lucas.m.green@gmail.com"
+		}
+	],
+	"require": {
+		"php": "~5.3"
+	},
+	"autoload": {
+		"psr-4": { "Mythril\\AuthorizeNet\\" : "src/" }
+	}
+}
