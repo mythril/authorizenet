@@ -9,6 +9,8 @@ class API extends Request{
 
 	const SANDBOX = 'https://apitest.authorize.net/xml/v1/request.api';
 	const LIVE = 'https://api.authorize.net/xml/v1/request.api';
+	const SANDBOX_HOSTED = 'https://test.authorize.net/payment/payment';
+	const LIVE_HOSTED = 'https://accept.authorize.net/payment/payment';
 
 	public function __construct($name, $transactionKey, $sandBox){
 		$this->name = $name;
@@ -18,6 +20,10 @@ class API extends Request{
 
 	public function endPoint() {
 		return $this->sandBox ? self::SANDBOX : self::LIVE;
+	}
+
+	public function hostedUrl() {
+		return $this->sandBox ? self::SANDBOX_HOSTED : self::LIVE_HOSTED;
 	}
 
 	public function execute(APICall $call) {
