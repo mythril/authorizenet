@@ -18,7 +18,8 @@
 		}
 	],
 	"require": {
-		"php": "~5.3"
+		"php": "~5.3",
+		"indigophp/hash-compat": "^1.1"
 	},
 	"autoload": {
 		"psr-4": { "Mythril\\AuthorizeNet\\" : "src/" }

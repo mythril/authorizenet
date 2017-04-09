@@ -5,7 +5,10 @@ namespace Mythril\AuthorizeNet;
 class GetAcceptPaymentPage implements APICall {
 	protected $txRequest;
 	protected $settings;
-	public function __construct(TransactionRequest $txRequest, HostedPaymentSettings $settings) {
+	public function __construct(
+		TransactionRequest $txRequest,
+		HostedPaymentSettings $settings
+	) {
 		$this->txRequest = $txRequest;
 		$this->settings = $settings;
 	}
