@@ -13,6 +13,8 @@ $api = new A\API(
 
 $details = new A\TransactionRequest('authCaptureTransaction', '20.00');
 
+$details->add(new A\Order());
+
 $customer = new A\Customer();
 $customer->email('luke@stoysnet.com');
 $details->add($customer);
@@ -42,6 +44,7 @@ $settings->showBillingAddress(true)
 		->requireShippingAddress(false)
 		->bgColor('EE00EE');
 
+try {
 //echo (json_encode($details->getData(), JSON_PRETTY_PRINT));die;
 $getPage = new A\GetAcceptPaymentPage($details, $settings);
 
@@ -50,6 +53,11 @@ $getPage = new A\GetAcceptPaymentPage($details, $settings);
 $result = $api->execute($getPage);
 
 //print_r($result);die;
+} catch (Exception $e) {
+	echo $e, "\n";
+	echo json_encode($getPage->getPayload(array()), JSON_PRETTY_PRINT);
+	exit;
+}
 
 ?>
 <!DOCTYPE HTML>
@@ -57,6 +65,11 @@ $result = $api->execute($getPage);
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+<!--
+<?php
+print_r($result);
+?>
+-->
 </head>
 <body>
 	<form action="<?= $api->hostedUrl()?>" method="POST">

@@ -4,7 +4,9 @@ namespace Mythril\AuthorizeNet;
 
 class AcceptPaymentPage {
 	protected $token;
+	protected $response;
 	public function __construct(array $result) {
+		$this->response = $result;
 		if ($result['messages']['resultCode'] === 'Ok') {
 			$this->token = $result['token'];
 		} else {

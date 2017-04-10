@@ -19,14 +19,48 @@ class TransactionRequest implements Details {
 		return "transactionRequest";
 	}
 
+	//... how can such an obvious flaw pass undetected in a financial
+	// setting
+	protected static $brokenOrdering = array(
+		'transactionType',
+		'amount',
+		'currencyCode',
+		'payment',
+		'profile',
+		'solution',
+		'callId',
+		'terminalNumber',
+		'authCode',
+		'refTransId',
+		'splitTenderId',
+		'order',
+		'lineItems',
+		'tax',
+		'duty',
+		'shipping',
+		'taxExempt',
+		'poNumber',
+		'customer',
+		'billTo',
+		'shipTo',
+		'customerIP',
+		'cardholderAuthentication',
+		'retail',
+		'employeeId',
+		'transactionSettings',
+		'userFields',
+	);
+
 	public function getData() {
 		$data = array(
 			'transactionType' => $this->transactionType,
 			'amount' => $this->amount,
 		);
 
-		foreach ($this->deets as $fieldName => $fData) {
-			$data[$fieldName] = $fData;
+		foreach (self::$brokenOrdering as $fieldName) {
+			if (!empty($this->deets[$fieldName])) {
+				$data[$fieldName] = $this->deets[$fieldName];
+			}
 		}
 
 		return $data;
