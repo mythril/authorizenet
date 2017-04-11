@@ -11,6 +11,23 @@ class NotificationDecoder {
 		$this->sigKey = $sigKey;
 	}
 
+	public function getallheaders() {
+		if (function_exists('\getallheaders')) {
+			return \getallheaders();
+		}
+		if (!is_array($_SERVER)) {
+			return array();
+		}
+
+		$headers = array();
+		foreach ($_SERVER as $name => $value) {
+			if (substr($name, 0, 5) == 'HTTP_') {
+				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+			}
+		}
+		return $headers;
+	}
+
 	public function validate($raw, $rsig) {
 		$accepted_algos = array('sha512' => true);
 		$parts = explode('=', $rsig);
@@ -25,7 +42,7 @@ class NotificationDecoder {
 
 	public function decodePost() {
 		$rawPost = file_get_contents('php://input');
-		$headers = getallheaders();
+		$headers = $this->getallheaders();
 		if (!$this->validate($rawPost, $headers['X-Anet-Signature'])) {
 			throw new Exception('Invalid HMAC');
 		}

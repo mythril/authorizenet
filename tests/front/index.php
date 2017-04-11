@@ -37,8 +37,8 @@ $settings->showBillingAddress(true)
 		->showEmail(true)
 		->requireEmail(true)
 		->requireCardCode(true)
-		->returnUrl('http://stndev/authorizenet/tests/front/confirm.php')
-		->cancelUrl('http://stndev/authorizenet/tests/front/cancel.php')
+		->returnUrl($cfg['test_base'] . '/tests/front/confirm.php')
+		->cancelUrl($cfg['test_base'] . '/tests/front/cancel.php')
 		->useCaptcha(false)
 		->showShippingAddress(false)
 		->requireShippingAddress(false)
@@ -67,7 +67,7 @@ $result = $api->execute($getPage);
 	<title></title>
 <!--
 <?php
-print_r($result);
+print_r($getPage);
 ?>
 -->
 </head>
